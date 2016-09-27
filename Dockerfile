@@ -18,7 +18,7 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
       Version="1.8" \
       Release="12" \
       io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
-      io.s2i.scripts-url=image:///usr/libexec/s2i
+      io.s2i.scripts-url=image:///usr/libexec/s2i \
       Architecture="x86_64"
 
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
