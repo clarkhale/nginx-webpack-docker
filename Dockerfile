@@ -1,4 +1,4 @@
-FROM rhscl/s2i-base-rhel7
+FROM s2i-base-rhel7
 
 # RHSCL rh-nginx18 image.
 #
