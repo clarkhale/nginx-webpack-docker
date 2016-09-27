@@ -17,9 +17,19 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
       Name="rhscl_beta/nginx-18-rhel7" \
       Version="1.8" \
       Release="12" \
+      io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \
+      io.s2i.scripts-url=image:///usr/libexec/s2i
       Architecture="x86_64"
 
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
+
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
+    yum-config-manager --disable epel >/dev/null || : && \
+    INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
+    yum clean all -y
 
 RUN yum install -y yum-utils gettext hostname && \
     yum-config-manager --enable rhel-server-rhscl-7-rpms && \
@@ -27,7 +37,7 @@ RUN yum install -y yum-utils gettext hostname && \
     yum-config-manager --enable rhel-7-server-ose-3.0-rpms && \
     yum install -y --setopt=tsflags=nodocs nss_wrapper && \
     yum install -y --setopt=tsflags=nodocs bind-utils rh-nginx18 rh-nginx18-nginx && \
-    yum clean all
+    yum clean all -y 
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY ./s2i/bin/ $STI_SCRIPTS_PATH
