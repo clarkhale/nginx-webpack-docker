@@ -1,4 +1,4 @@
-FROM s2i-base-rhel7
+FROM rhscl/s2i-base-rhel7
 
 # RHSCL rh-nginx18 image.
 #
@@ -23,11 +23,11 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
 
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --enable rhel-7-server-optional-rpms && \
-    yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+RUN INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
+    yum install -y --setopt=tsflags=nodocs \
+    --enablerepo rhel-server-rhscl-7-rpms  \
+    --enablerepo rhel-7-server-optional-rpms \
+    $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
 

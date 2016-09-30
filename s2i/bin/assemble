@@ -1,15 +1,19 @@
 #!/bin/bash
 
 set -e
+set -x
 
 echo "---> Installing application source"
-cp -Rf /tmp/src/. ./
+cp -vRf /tmp/src/. ./
 
-source scl_source enable rh-nodejs4
+#echo "---> Enabling nodejs"
+#source scl_source enable rh-nodejs4
+
+echo "----> Running npm install"
+npm install
 
 echo "---> Running Webpack on source"
 npm run webpack
-
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files..."
@@ -19,5 +23,12 @@ if [ -d ./nginx-cfg ]; then
   fi
 fi
 
+echo "---> Fix permisions"
+
 # Fix source directory permissions
 fix-permissions ./
+
+echo "---> Done"
+
+npm config get cache
+ps aux
