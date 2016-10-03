@@ -32,6 +32,3 @@ echo "---> Fix permisions"
 fix-permissions ./
 
 echo "---> Done"
-
-npm config get cache
-ps aux
