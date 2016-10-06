@@ -22,6 +22,7 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
       Architecture="x86_64"
 
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
+ENV NGINX_DEFAULT_SERVER_CONFIGURATION_PATH=/opt/app-root/etc/nginx.default.d
 
 RUN INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
     yum install -y --setopt=tsflags=nodocs \
@@ -46,11 +47,14 @@ COPY ./s2i/bin/ $STI_SCRIPTS_PATH
 # run and build the applications.
 COPY ./contrib/ /opt/app-root
 
+#RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx18/nginx/nginx.conf 
+
+COPY ./contrib/nginx.conf /etc/opt/rh/rh-nginx18/nginx/nginx.conf 
+
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
 # random UID.
-RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx18/nginx/nginx.conf && \
-    mkdir -p /opt/app-root/etc/nginx.d/ && \
+RUN mkdir -p /opt/app-root/etc/nginx.d/ && \
     chmod -R a+rwx /opt/app-root/etc && \
     chmod -R a+rwx /var/opt/rh/rh-nginx18 && \
     chown -R 1001:0 /opt/app-root && \

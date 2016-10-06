@@ -19,6 +19,13 @@ echo "---> Removing node_modules directory"
 rm -rf node_modules/
 
 if [ -d ./nginx-cfg ]; then
+  if [ -d ./nginx-cfg/default.d ] ; then
+    echo "---> Copying nginx default.d config files...."
+    mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+    cp -v ./nginx-cfg/default.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+    rm -rf ./nginx-cfg/default.d
+  fi
+
   echo "---> Copying nginx configuration files..."
   if [ "$(ls -A ./nginx-cfg/*.conf)" ]; then
     cp -v ./nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
