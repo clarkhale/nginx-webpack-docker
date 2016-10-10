@@ -25,7 +25,7 @@ ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_SERVER_CONFIGURATION_PATH=/opt/app-root/etc/nginx.default.d
 ENV NGINX_ENV_SERVER_CONFIGURATION_PATH=/opt/app-root/etc/nginx.env.d
 
-RUN INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
+RUN INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon ruby" && \
     yum install -y --setopt=tsflags=nodocs \
     --enablerepo rhel-server-rhscl-7-rpms  \
     --enablerepo rhel-7-server-optional-rpms \

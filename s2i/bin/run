@@ -4,4 +4,18 @@ source /opt/app-root/etc/generate_container_user
 
 set -e
 
+for i in ${NGINX_CONFIGURATION_PATH}/*.conf.erb ; do
+	cat $i | erb > ${i%%.erb}
+done
+
+for i in ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
+        ls -la ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/
+        who am i
+	cat $i | erb > ${i%%.erb}
+done
+
+for i in ${NGINX_ENV_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
+	cat $i | erb > ${i%%.erb}
+done 
+
 exec nginx -g "daemon off;"
