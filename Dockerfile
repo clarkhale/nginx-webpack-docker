@@ -23,6 +23,7 @@ LABEL io.k8s.description="Platform for running nginx or building nginx-based app
 
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_SERVER_CONFIGURATION_PATH=/opt/app-root/etc/nginx.default.d
+ENV NGINX_ENV_SERVER_CONFIGURATION_PATH=/opt/app-root/etc/nginx.env.d
 
 RUN INSTALL_PKGS="rh-nodejs4 rh-nodejs4-npm rh-nodejs4-nodejs-nodemon" && \
     yum install -y --setopt=tsflags=nodocs \
