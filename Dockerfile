@@ -8,7 +8,7 @@ FROM rhscl/s2i-base-rhel7
 EXPOSE 8080
 EXPOSE 8443
 
-LABEL io.k8s.description="Platform for running nginx or building nginx-based application" \
+LABEL io.k8s.description="Platform for running AngularJS on nginx" \
       io.k8s.display-name="Nginx 1.8" \
       io.openshift.expose-services="8080:http" \
       io.openshift.expose-services="8443:https" \
