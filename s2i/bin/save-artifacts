@@ -1,0 +1,6 @@
+#!/bin/bash
+
+if [ -d .npm ]; then
+    # all deps contents to tar stream
+    tar cf - .npm 
+fi
