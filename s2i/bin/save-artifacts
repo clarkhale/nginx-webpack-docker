@@ -1,11 +1,9 @@
 #!/bin/bash
-
-pushd ${HOME}
-echo "S2I Save-artifact working dir:  "`pwd`
+set -e
+pushd ${HOME} >/dev/null 2>&1
 if [ -d .npm ]; then
-    echo "Saving .npm cache"
     # all deps contents to tar stream
-    tar cvf - .npm 
-    echo "Done Saving .npm cache"
+    tar cf - .npm 
 fi
-popd
+popd >/dev/null 2>&1
+
