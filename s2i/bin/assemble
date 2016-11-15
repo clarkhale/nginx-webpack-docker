@@ -6,6 +6,11 @@ set -x
 echo "---> Installing application source"
 cp -vRf /tmp/src/. ./
 
+echo "---> Restoring NPM cache"
+if [ -d /tmp/artifacts/.npm ] ; then
+	cp -vRf /tmp/artifacts/.npm ./
+fi
+
 #echo "---> Enabling nodejs"
 #source scl_source enable rh-nodejs4
 
