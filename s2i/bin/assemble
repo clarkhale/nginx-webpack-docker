@@ -15,7 +15,7 @@ echo "----> Running npm install"
 npm install
 
 echo "---> Running Webpack on source"
-npm run webpack
+npm run ${ANGULAR_BUILD_TARGET:-webpack-prod}
 
 echo "---> Removing node_modules directory"
 rm -rf node_modules/

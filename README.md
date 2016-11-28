@@ -28,3 +28,11 @@ template, and will be processed at run time (NOT at build time).  If
 needed, OpenShift environment variables can be pulled into the nginx
 configuration using these erb templates.
 
+Build Environment Variables
+---------------------------
+
+The following variables can be set on the BuildConfig to influence behavior:
+
+| Variable             | Default              | Description |
+| -------------------- | -------------------- | ----------- | 
+| ANGULAR_BUILD_TARGET | webpack-prod         | Sets the build target  |
