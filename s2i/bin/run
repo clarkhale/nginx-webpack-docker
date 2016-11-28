@@ -22,11 +22,4 @@ if [ -d ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH} ] ; then
     done
 fi
 
-# Legacy;  remove after updates made to application
-if [ -d "/opt/app-root/etc/nginx.default.d" ] ; then
-    for i in /opt/app-root/etc/nginx.default.d/*.conf.erb ; do
-	cat $i | erb > ${i%%.erb}
-    done
-fi
-
 exec nginx -g "daemon off;"
