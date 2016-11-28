@@ -4,8 +4,8 @@ source /opt/app-root/etc/generate_container_user
 
 set -e
 
-if [ -d ${NGINX_CONFIGURATION_PATH} ] ; then
-    for i in ${NGINX_CONFIGURATION_PATH}/*.conf.erb ; do
+if [ -d ${NGINX_GLOBAL_CONFIGURATION_PATH} ] ; then
+    for i in ${NGINX_GLOBAL_CONFIGURATION_PATH}/*.conf.erb ; do
 	cat $i | erb > ${i%%.erb}
     done
 fi
