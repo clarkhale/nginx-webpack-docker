@@ -1,6 +1,7 @@
 FROM rhscl/s2i-base-rhel7
 
-# RHSCL rh-nginx18 image.
+# S2I Image for building an AngularJS application and serving it up
+# via nginx.  Based on the RHSCL rh-nginx18 image.
 #
 # Volumes:
 #  * /var/opt/rh/rh-nginx18/log/nginx/ - Storage for logs
@@ -8,11 +9,10 @@ FROM rhscl/s2i-base-rhel7
 EXPOSE 8080
 
 LABEL io.k8s.description="Platform for running AngularJS on nginx" \
-      io.k8s.display-name="Nginx 1.8" \
+      io.k8s.display-name="AngularJS/Webpack running on nginx 1.8" \
       io.openshift.expose-services="8080:http" \
-      io.openshift.tags="builder,nginx,rh-nginx18" \
-      BZComponent="rh-nginx18-docker" \
-      Name="rhscl_beta/nginx-18-rhel7" \
+      io.openshift.tags="builder,nginx,rh-nginx18,angularjs" \
+      Name="rhscl/nginx-webpack-docker" \
       Version="1.8" \
       Release="12" \
       io.openshift.s2i.scripts-url=image:///usr/libexec/s2i \

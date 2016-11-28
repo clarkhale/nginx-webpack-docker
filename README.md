@@ -1,20 +1,30 @@
-Nginx 1.8 server and a reverse proxy server docker image
-========================================================
+AngularJS static application served up with Nginx 1.8 server 
+============================================================
 
-The `centos/rh-nginx-18-centos7` image provides an nginx 1.8 server and a reverse proxy server. The image can be used as a base image for other applications based on nginx 1.8 web server.
+This S2I image builds an AngularJS static application and serves it up
+with nginx, providing several points to customize the nginx
+configuration.
 
-
-To pull the `centos/rh-nginx-18-centos7` image, run the following command as root:
-```
-docker pull centos/rh-nginx-18-centos7
-```
-
+This image is a combination of the rh-nginx-18 image and the
+rh-nodejs4 Dockerfiles from the Red Hat Software Collections Library
+(RHSCL).
 
 Configuration
 -------------
-The nginx container image supports the following configuration variable, which can be set by using the `-e` option with the docker run command:
 
+The application can use three directories to directly influence the
+nginx configuration:
 
-|    Variable name       |    Description                            |
-| :--------------------- | ----------------------------------------- |
-|  `NGINX_LOG_TO_VOLUME` | By default, nginx logs into standard output, so the logs are accessible by using the docker logs command. When `NGINX_LOG_TO_VOLUME` is set, nginx logs into `/var/log/nginx16`, which can be mounted to host system using the Docker volumes. |
+| Path | Description |
+| ---- | ----------- | 
+| nginx-cfg/nginx.global.d/ | Configuration included at the global scope | 
+| nginx-cfg/nginx.httpglobal.d/ | Configuration included at http block scope | 
+| nginx-cfg/nginx.defaultserver.d/ | Configuration included in the default server running on port 8080 |
+
+Any file ending in .conf will be included.  
+
+Any file ending in .conf.erb will be treated as an Embedded Ruby
+template, and will be processed at run time (NOT at build time).  If
+needed, OpenShift environment variables can be pulled into the nginx
+configuration using these erb templates.
+
