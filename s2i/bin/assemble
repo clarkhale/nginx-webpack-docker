@@ -11,9 +11,6 @@ if [ -d /tmp/artifacts/.npm ] ; then
 	cp -vRf /tmp/artifacts/.npm ./
 fi
 
-#echo "---> Enabling nodejs"
-#source scl_source enable rh-nodejs4
-
 echo "----> Running npm install"
 npm install
 
