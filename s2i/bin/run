@@ -4,20 +4,23 @@ source /opt/app-root/etc/generate_container_user
 
 set -e
 
-if compgen -G ${NGINX_GLOBAL_CONFIGURATION_PATH}/*.conf.erb ; then
+if compgen -G ${NGINX_GLOBAL_CONFIGURATION_PATH}/*.conf.erb >/dev/null ; then
     for i in ${NGINX_GLOBAL_CONFIGURATION_PATH}/*.conf.erb ; do
+	echo "Processing $i"
         cat $i | erb > ${i%%.erb}
     done
 fi
 
-if compgen -G ${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}/*.conf.erb ; then
+if compgen -G ${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}/*.conf.erb >/dev/null ; then
     for i in ${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
+	echo "Processing $i"
         cat $i | erb > ${i%%.erb}
     done 
 fi
 
-if compgen -G ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/*.conf.erb ; then
+if compgen -G ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/*.conf.erb >/dev/null ; then
     for i in ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
+	echo "Processing $i"
         cat $i | erb > ${i%%.erb}
     done
 fi
