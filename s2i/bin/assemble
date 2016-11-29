@@ -8,7 +8,7 @@ cp -vRf /tmp/src/. ./
 
 echo "---> Restoring NPM cache"
 if [ -d /tmp/artifacts/.npm ] ; then
-	cp -vRf /tmp/artifacts/.npm ./
+    cp -vRf /tmp/artifacts/.npm ./
 fi
 
 echo "----> Running npm install"
@@ -21,61 +21,61 @@ echo "---> Removing node_modules directory"
 rm -rf node_modules/
 
 if [ -d ./nginx-cfg ]; then
-  # Start Legacy  Remove after fixing app code base
-  if [ -d ./nginx-cfg/default.d ] ; then
-    echo "---> Copying nginx default.d config files...."
-    mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    if [ "$(ls -A ./nginx-cfg/default.d/*.conf)" ]; then
-        cp -v ./nginx-cfg/default.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+    # Start Legacy  Remove after fixing app code base
+    if [ -d ./nginx-cfg/default.d ] ; then
+        echo "---> Copying nginx default.d config files...."
+        mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/default.d/*.conf)" ]; then
+            cp -v ./nginx-cfg/default.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        fi
+        if [ "$(ls -A ./nginx-cfg/default.d/*.conf.erb)" ]; then
+            cp -v ./nginx-cfg/default.d/*.conf.erb "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        fi
+        chmod -R a+rwx "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        rm -rvf ./nginx-cfg/default.d
     fi
-    if [ "$(ls -A ./nginx-cfg/default.d/*.conf.erb)" ]; then
-        cp -v ./nginx-cfg/default.d/*.conf.erb "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    fi
-    chmod -R a+rwx "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    rm -rvf ./nginx-cfg/default.d
-  fi
-  # End 
+    # End 
 
-  if [ -d ./nginx-cfg/serverdefault.d ] ; then
-    echo "---> Copying nginx serverdefault.d config files...."
-    mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    if [ "$(ls -A ./nginx-cfg/serverdefault.d/*.conf)" ]; then
-        cp -v ./nginx-cfg/serverdefault.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+    if [ -d ./nginx-cfg/serverdefault.d ] ; then
+        echo "---> Copying nginx serverdefault.d config files...."
+        mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/serverdefault.d/*.conf)" ]; then
+            cp -v ./nginx-cfg/serverdefault.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        fi
+        if [ "$(ls -A ./nginx-cfg/serverdefault.d/*.conf.erb)" ]; then
+            cp -v ./nginx-cfg/serverdefault.d/*.conf.erb "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        fi
+        chmod -R a+rwx "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
+        rm -rvf ./nginx-cfg/serverdefault.d
     fi
-    if [ "$(ls -A ./nginx-cfg/serverdefault.d/*.conf.erb)" ]; then
-        cp -v ./nginx-cfg/serverdefault.d/*.conf.erb "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    fi
-    chmod -R a+rwx "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-    rm -rvf ./nginx-cfg/serverdefault.d
-  fi
 
-  if [ -d ./nginx-cfg/httpserver.d ] ; then
-    echo "---> Copying nginx httpserver.d config files...."
-    mkdir -p "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
-    if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf)" ]; then
-        cp -v ./nginx-cfg/httpserver.d/*.conf "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+    if [ -d ./nginx-cfg/httpserver.d ] ; then
+        echo "---> Copying nginx httpserver.d config files...."
+        mkdir -p "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf)" ]; then
+            cp -v ./nginx-cfg/httpserver.d/*.conf "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        fi
+        if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf.erb)" ]; then
+            cp -v ./nginx-cfg/httpserver.d/*.conf.erb "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        fi
+        chmod -R a+rwx "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        rm -rvf ./nginx-cfg/httpserver.d
     fi
-    if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf.erb)" ]; then
-        cp -v ./nginx-cfg/httpserver.d/*.conf.erb "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
-    fi
-    chmod -R a+rwx "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
-    rm -rvf ./nginx-cfg/httpserver.d
-  fi
 
-  if [ -d ./nginx-cfg/global.d ] ; then
-    echo "---> Copying nginx global.d config files...."
-    mkdir -p "${NGINX_GLOBAL_CONFIGURATION_PATH}"
-    if [ "$(ls -A ./nginx-cfg/global.d/*.conf)" ]; then
-        cp -v ./nginx-cfg/global.d/*.conf "${NGINX_GLOBAL_CONFIGURATION_PATH}"
+    if [ -d ./nginx-cfg/global.d ] ; then
+        echo "---> Copying nginx global.d config files...."
+        mkdir -p "${NGINX_GLOBAL_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/global.d/*.conf)" ]; then
+            cp -v ./nginx-cfg/global.d/*.conf "${NGINX_GLOBAL_CONFIGURATION_PATH}"
+        fi
+        if [ "$(ls -A ./nginx-cfg/global.d/*.conf.erb)" ]; then
+            cp -v ./nginx-cfg/global.d/*.conf.erb "${NGINX_GLOBAL_CONFIGURATION_PATH}"
+        fi
+        chmod -R a+rwx "${NGINX_GLOBAL_CONFIGURATION_PATH}"
+        rm -rvf ./nginx-cfg/global.d
     fi
-    if [ "$(ls -A ./nginx-cfg/global.d/*.conf.erb)" ]; then
-        cp -v ./nginx-cfg/global.d/*.conf.erb "${NGINX_GLOBAL_CONFIGURATION_PATH}"
-    fi
-    chmod -R a+rwx "${NGINX_GLOBAL_CONFIGURATION_PATH}"
-    rm -rvf ./nginx-cfg/global.d
-  fi
 
-  rm -rvf ./nginx-cfg
+    rm -rvf ./nginx-cfg
 fi
 
 echo "---> Fix permisions"
