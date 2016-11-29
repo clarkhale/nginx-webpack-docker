@@ -35,17 +35,17 @@ if [ -d ./nginx-cfg ]; then
         rm -rvf ./nginx-cfg/serverdefault.d
     fi
 
-    if [ -d ./nginx-cfg/httpserver.d ] ; then
-        echo "---> Copying nginx httpserver.d config files...."
+    if [ -d ./nginx-cfg/httpglobal.d ] ; then
+        echo "---> Copying nginx httpglobal.d config files...."
         mkdir -p "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
-        if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf)" ]; then
-            cp -v ./nginx-cfg/httpserver.d/*.conf "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/httpglobal.d/*.conf)" ]; then
+            cp -v ./nginx-cfg/httpglobal.d/*.conf "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
         fi
-        if [ "$(ls -A ./nginx-cfg/httpserver.d/*.conf.erb)" ]; then
-            cp -v ./nginx-cfg/httpserver.d/*.conf.erb "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
+        if [ "$(ls -A ./nginx-cfg/httpglobal.d/*.conf.erb)" ]; then
+            cp -v ./nginx-cfg/httpglobal.d/*.conf.erb "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
         fi
         chmod -R a+rwx "${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}"
-        rm -rvf ./nginx-cfg/httpserver.d
+        rm -rvf ./nginx-cfg/httpglobal.d
     fi
 
     if [ -d ./nginx-cfg/global.d ] ; then
