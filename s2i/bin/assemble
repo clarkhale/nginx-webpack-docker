@@ -21,20 +21,6 @@ echo "---> Removing node_modules directory"
 rm -rf node_modules/
 
 if [ -d ./nginx-cfg ]; then
-    # Start Legacy  Remove after fixing app code base
-    if [ -d ./nginx-cfg/default.d ] ; then
-        echo "---> Copying nginx default.d config files...."
-        mkdir -p "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-        if [ "$(ls -A ./nginx-cfg/default.d/*.conf)" ]; then
-            cp -v ./nginx-cfg/default.d/*.conf "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-        fi
-        if [ "$(ls -A ./nginx-cfg/default.d/*.conf.erb)" ]; then
-            cp -v ./nginx-cfg/default.d/*.conf.erb "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-        fi
-        chmod -R a+rwx "${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}"
-        rm -rvf ./nginx-cfg/default.d
-    fi
-    # End 
 
     if [ -d ./nginx-cfg/serverdefault.d ] ; then
         echo "---> Copying nginx serverdefault.d config files...."
