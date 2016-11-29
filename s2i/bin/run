@@ -6,19 +6,19 @@ set -e
 
 if [ -d ${NGINX_GLOBAL_CONFIGURATION_PATH} ] ; then
     for i in ${NGINX_GLOBAL_CONFIGURATION_PATH}/*.conf.erb ; do
-	cat $i | erb > ${i%%.erb}
+        cat $i | erb > ${i%%.erb}
     done
 fi
 
 if [ -d ${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH} ] ; then
     for i in ${NGINX_HTTP_GLOBAL_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
-	cat $i | erb > ${i%%.erb}
+        cat $i | erb > ${i%%.erb}
     done 
 fi
 
 if [ -d ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH} ] ; then
     for i in ${NGINX_DEFAULT_SERVER_CONFIGURATION_PATH}/*.conf.erb ; do
-	cat $i | erb > ${i%%.erb}
+        cat $i | erb > ${i%%.erb}
     done
 fi
 
